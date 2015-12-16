@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  h1 설문 작성
+
+  form(action='/posts', method='POST')
+    .form-group
+      label(for='email') 이메일
+      input.form-control(name='email')
+    .form-group
+      label(for='title') 제목
+      input.form-control(name='title')
+    .form-group
+      label(for='content') 내용
+      textarea.form-control(name='content')
+
+  - val = 1;
+  - options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  .form(action='/posts/comments', method='POST')
+    .form-group
+      label(for='question') 질문
+      input.form-control(name='question', placeholder='질문형태')
+    each option in options
+      .form-group
+        input(type='radio', name='content', value=option, checked=(val===option))
+        label 보기#{option}
+
+    .form-group
+      button.btn.btn-info 질문추가
+    .form-action
+      a.btn.btn-default(href='javascript:window.history.back();') 뒤로
+      | &nbsp;
+      button.btn.btn-primary(type='submit') 설문작성
